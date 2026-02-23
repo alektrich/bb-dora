@@ -35,3 +35,25 @@ npm i && npm run build && npm run start
 ```
 
 The app will be available at http://localhost:6767
+
+### Docker
+
+With `.env.local` configured, run:
+
+```bash
+docker compose up --build -d
+```
+
+The app will be available at http://localhost:6767.
+
+To use a custom port:
+
+```bash
+PORT=9090 docker compose up --build -d
+```
+
+To stop:
+
+```bash
+docker compose down
+```
