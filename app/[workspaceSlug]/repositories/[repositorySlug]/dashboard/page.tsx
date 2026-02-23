@@ -54,8 +54,8 @@ export default function DashboardPage() {
         }
       />
 
-      <div className='flex flex-wrap overflow-hidden'>
-        <div className='w-1/2 overflow-hidden m-auto'>
+      <div className='flex flex-wrap items-center'>
+        <div className='w-1/2 m-auto'>
           <Breadcrumbs
             history={[
               { name: 'Workspaces', href: '/' },
@@ -64,15 +64,13 @@ export default function DashboardPage() {
             ]}
           />
         </div>
-        <div className='w-1/2 overflow-hidden'>
-          <div className='float-right flex gap-2'>
-            <TimeRangeDropdown selectedDays={daysRange} onChange={setDaysRange} />
-            <EnvironmentsDropdown
-              environmentList={environmentList}
-              environment={selectedEnvironment}
-              setSelectedEnvironment={setUserSelectedEnvironment}
-            />
-          </div>
+        <div className='w-1/2 flex justify-end gap-2'>
+          <TimeRangeDropdown selectedDays={daysRange} onChange={setDaysRange} />
+          <EnvironmentsDropdown
+            environmentList={environmentList}
+            environment={selectedEnvironment}
+            setSelectedEnvironment={setUserSelectedEnvironment}
+          />
         </div>
       </div>
 

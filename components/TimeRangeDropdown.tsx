@@ -20,13 +20,14 @@ export default function TimeRangeDropdown({ selectedDays, onChange }: IProps) {
 
   return (
     <Listbox value={selected.days} onChange={onChange}>
-      <ListboxButton className='hover:cursor-pointer min-w-lg relative w-full cursor-default rounded-sm border border-gray-300 bg-white py-1 pl-3 pr-10 text-left sm:text-sm hover:bg-gray-100'>
+      <div className='relative'>
+      <ListboxButton className='hover:cursor-pointer relative w-fit whitespace-nowrap cursor-default rounded-sm border border-gray-300 bg-white py-1 pl-3 pr-10 text-left sm:text-sm hover:bg-gray-100'>
         {selected.label}
         <span className='pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2'>
           <FaChevronDown className='h-3 w-3 text-black' aria-hidden='true' />
         </span>
       </ListboxButton>
-      <ListboxOptions className='absolute z-10 mt-1 max-h-56 overflow-auto rounded-sm bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
+      <ListboxOptions className='absolute z-10 mt-1 max-h-56 w-full min-w-max overflow-auto rounded-sm bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm'>
         {TIME_RANGES.map((range) => (
           <ListboxOption
             key={range.days}
@@ -43,6 +44,7 @@ export default function TimeRangeDropdown({ selectedDays, onChange }: IProps) {
           </ListboxOption>
         ))}
       </ListboxOptions>
+      </div>
     </Listbox>
   );
 }

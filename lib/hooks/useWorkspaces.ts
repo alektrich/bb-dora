@@ -7,7 +7,7 @@ async function fetchWorkspaces(): Promise<IWorkspace[]> {
   const res = await fetch('/api/bitbucket/workspaces');
   if (!res.ok) throw new Error('Failed to fetch workspaces');
   const data = await res.json();
-  return data.values.map((w: any) => ({
+  return data.map((w: any) => ({
     id: w.uuid,
     slug: w.slug,
     name: w.name,

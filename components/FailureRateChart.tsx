@@ -22,7 +22,16 @@ export default function FailureRateChart({ deployments, startDate, endDate, envi
       legend: { position: 'top' as const },
       title: { display: true, text: 'Deployment Failure Rate' },
     },
-    scale: { ticks: { precision: 0 } },
+    scales: {
+      x: {
+        ticks: { color: '#374151' },
+        grid: { color: '#e5e7eb' },
+      },
+      y: {
+        ticks: { color: '#374151', precision: 0 },
+        grid: { color: '#e5e7eb' },
+      },
+    },
   };
 
   const labels = useMemo(() => getDatesInRange(startDate, endDate), [startDate, endDate]);

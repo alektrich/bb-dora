@@ -7,7 +7,7 @@ async function fetchRepositories(workspaceSlug: string): Promise<IRepository[]> 
   const res = await fetch(`/api/bitbucket/repositories/${workspaceSlug}`);
   if (!res.ok) throw new Error('Failed to fetch repositories');
   const data = await res.json();
-  return data.values.map((r: any) => ({
+  return data.map((r: any) => ({
     id: r.uuid,
     name: r.name,
     description: r.description,

@@ -81,7 +81,16 @@ export default function PullRequestChart({ pullRequests, startDate, endDate }: I
       legend: { position: 'top' as const },
       title: { display: true, text: 'Pull Requests' },
     },
-    scales: { y: { ticks: { precision: 0 } } },
+    scales: {
+      x: {
+        ticks: { color: '#374151' },
+        grid: { color: '#e5e7eb' },
+      },
+      y: {
+        ticks: { color: '#374151', precision: 0 },
+        grid: { color: '#e5e7eb' },
+      },
+    },
   };
 
   return (

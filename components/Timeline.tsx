@@ -27,7 +27,7 @@ export default function Timeline({ pullRequest }: IProps) {
     <ol className='items-center sm:flex'>
       <li className='relative mb-6 sm:mb-0'>
         <div className='flex items-center'>
-          <div className='flex z-10 justify-center items-center w-6 h-6 bg-gray-800 rounded-full ring-0 ring-white shrink-0'>
+          <div className='flex z-10 justify-center items-center w-6 h-6 bg-blue-500 rounded-full ring-0 ring-white shrink-0'>
             <FaCheck color='white' size={10} />
           </div>
           <div className='hidden sm:flex w-full bg-gray-200 h-0.5'></div>
@@ -43,7 +43,7 @@ export default function Timeline({ pullRequest }: IProps) {
       {comment && (
         <li className='relative mb-6 sm:mb-0'>
           <div className='flex items-center'>
-            <div className='flex z-10 justify-center items-center w-6 h-6 bg-gray-800 rounded-full ring-0 ring-white shrink-0'>
+            <div className='flex z-10 justify-center items-center w-6 h-6 bg-blue-500 rounded-full ring-0 ring-white shrink-0'>
               <FaPencilAlt color='white' size={10} />
             </div>
             <div className='hidden sm:flex w-full bg-gray-200 h-0.5'></div>
@@ -61,7 +61,7 @@ export default function Timeline({ pullRequest }: IProps) {
       {approval && (
         <li className='relative mb-6 sm:mb-0'>
           <div className='flex items-center'>
-            <div className='flex z-10 justify-center items-center w-6 h-6 bg-gray-800 rounded-full ring-0 ring-white shrink-0'>
+            <div className='flex z-10 justify-center items-center w-6 h-6 bg-blue-500 rounded-full ring-0 ring-white shrink-0'>
               <FaThumbsUp color='white' size={10} />
             </div>
             <div className='hidden sm:flex w-full bg-gray-200 h-0.5'></div>
@@ -79,7 +79,7 @@ export default function Timeline({ pullRequest }: IProps) {
       {merged && (
         <li className='relative mb-6 sm:mb-0'>
           <div className='flex items-center'>
-            <div className='flex z-10 justify-center items-center w-6 h-6 bg-gray-800 rounded-full ring-0 ring-white shrink-0'>
+            <div className='flex z-10 justify-center items-center w-6 h-6 bg-blue-500 rounded-full ring-0 ring-white shrink-0'>
               <TiCloudStorage color='white' size={15} />
             </div>
           </div>

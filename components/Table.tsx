@@ -12,13 +12,13 @@ export default function Table({ header, data, loading }: IProps) {
       <div className='w-full inline-block align-middle'>
         <div className='overflow-x-auto border rounded-sm'>
           <table className='min-w-full divide-y divide-gray-200'>
-            <thead className='bg-gray-800'>
+            <thead className='bg-gray-100'>
               <tr>
                 {header.map((value) => (
                   <th
                     key={value}
                     scope='col'
-                    className='px-6 py-3 text-xs font-bold text-left text-white uppercase'
+                    className='px-6 py-3 text-xs font-bold text-left text-gray-700 uppercase'
                   >
                     {value}
                   </th>

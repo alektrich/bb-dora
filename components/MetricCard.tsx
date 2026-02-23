@@ -9,7 +9,7 @@ interface IProps {
 
 export default function MetricCard({ color, icon, name, value }: IProps) {
   return (
-    <div className='bg-gray-800 rounded-sm shadow p-2'>
+    <div className='bg-white border border-gray-200 rounded-sm shadow p-2'>
       <div className='flex flex-row items-center'>
         <div className='flex-shrink pl-4'>
           <div
@@ -19,8 +19,8 @@ export default function MetricCard({ color, icon, name, value }: IProps) {
           </div>
         </div>
         <div className='flex-1 text-right md:text-center'>
-          <h5 className='font-bold uppercase text-white'>{name}</h5>
-          <h3 className='font-bold text-3xl text-gray-300'>{value}</h3>
+          <h5 className='font-bold uppercase text-gray-900'>{name}</h5>
+          <h3 className='font-bold text-3xl text-gray-500'>{value}</h3>
         </div>
       </div>
     </div>

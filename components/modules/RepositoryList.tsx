@@ -27,10 +27,10 @@ export default function RepositoryList({ repositories }: IProps) {
                   <GoCode className='mx-auto object-cover h-10 w-10' color='#0052cc' />
                 </div>
                 <div className='flex-1 pl-1 mr-16'>
-                  <div className='font-medium'>{repository.name}</div>
-                  <div className='text-gray-600 text-sm'>{repository.description}</div>
+                  <div className='font-medium text-gray-900'>{repository.name}</div>
+                  <div className='text-gray-700 text-sm'>{repository.description}</div>
                 </div>
-                <div className='text-gray-600 text-xs'>
+                <div className='text-gray-500 text-xs'>
                   Last Updated: {new Date(repository.updatedOn).toLocaleString()}
                 </div>
                 <Link href={`/${repository.workspaceSlug}/repositories/${repository.slug}/dashboard`}>

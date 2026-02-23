@@ -12,7 +12,7 @@ export default function WorkspaceCard({ workspace }: IProps) {
   return (
     <div className='shadow-lg rounded-2xl w-full p-4 bg-gray-50 relative overflow-hidden'>
       <GoDatabase
-        className='absolute -right-4 -bottom-4 h-20 w-20 mb-4'
+        className='absolute right-1 bottom-1 h-12 w-12 mb-4'
         color='#0052cc'
       />
       <div className='w-4/6'>

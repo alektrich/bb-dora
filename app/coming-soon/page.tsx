@@ -3,14 +3,14 @@ import Link from 'next/link';
 
 export default function ComingSoonPage() {
   return (
-    <div className='flex items-center justify-center h-screen bg-gray-200'>
-      <section className='bg-gray-800'>
+    <div className='flex items-center justify-center h-screen bg-gray-50'>
+      <section className='bg-white border border-gray-200 rounded-lg'>
         <div className='py-8 px-4 mx-auto max-w-screen-md text-center lg:py-16 lg:px-12'>
-          <FaWrench className='mx-auto mb-4 w-20 h-20 text-gray-200' />
-          <h1 className='mb-4 text-4xl font-bold tracking-tight leading-none text-white lg:mb-6 md:text-5xl xl:text-6xl'>
+          <FaWrench className='mx-auto mb-4 w-20 h-20 text-gray-400' />
+          <h1 className='mb-4 text-4xl font-bold tracking-tight leading-none text-gray-900 lg:mb-6 md:text-5xl xl:text-6xl'>
             WORK IN PROGRESS
           </h1>
-          <p className='font-light text-gray-200 md:text-lg xl:text-xl'>
+          <p className='font-light text-gray-500 md:text-lg xl:text-xl'>
             We&apos;re still working on this feature. Click{' '}
             <Link href='/' className='hover:text-blue-700 text-blue-500'>
               here
