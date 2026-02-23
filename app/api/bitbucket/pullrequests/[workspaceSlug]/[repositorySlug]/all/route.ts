@@ -6,13 +6,16 @@ async function getAllPullRequests(
   headers: Record<string, string>,
   workspaceSlug: string,
   repositorySlug: string,
-  states: string[]
+  states: string[],
+  cutoffDate: Date
 ): Promise<any[]> {
   const allValues: any[] = [];
   let page = 1;
+  const cutoffISO = cutoffDate.toISOString().split('T')[0];
 
   while (true) {
     let url = `${BASE_URL}/repositories/${workspaceSlug}/${repositorySlug}/pullrequests?sort=-created_on&page=${page}`;
+    url += `&q=created_on>=${cutoffISO}`;
     states.forEach((state) => {
       url += `&state=${state}`;
     });
@@ -54,8 +57,12 @@ export async function GET(
     const headers = getAuthHeader();
     const { searchParams } = new URL(request.url);
     const states = searchParams.getAll('state');
+    const daysRange = parseInt(searchParams.get('daysRange') || '7', 10);
+    const cutoffDate = new Date();
+    cutoffDate.setDate(cutoffDate.getDate() - daysRange);
+    cutoffDate.setHours(0, 0, 0, 0);
 
-    const pullRequests = await getAllPullRequests(headers, workspaceSlug, repositorySlug, states);
+    const pullRequests = await getAllPullRequests(headers, workspaceSlug, repositorySlug, states, cutoffDate);
 
     const activities = await Promise.all(
       pullRequests.map(async (pr: any) => {

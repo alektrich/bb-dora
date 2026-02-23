@@ -65,7 +65,7 @@ export async function GET(
     );
 
     const mapped = activities.map(pullRequestWithActivityMapper);
-    return NextResponse.json(mapped);
+    return NextResponse.json({ data: mapped, hasMore: !!data.next });
   } catch (error: any) {
     const status = error.response?.status || 500;
     const message = error.response?.data?.error?.message || error.message;

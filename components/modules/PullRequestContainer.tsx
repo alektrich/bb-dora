@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 import { useAllPullRequests } from '@/lib/hooks/useAllPullRequests';
 import { usePullRequests } from '@/lib/hooks/usePullRequests';
 import ErrorToastr from '@/components/ErrorToastr';
@@ -22,17 +22,18 @@ interface IProps {
 export default function PullRequestContainer({ workspaceSlug, repositorySlug, daysRange }: IProps) {
   const [pageNumber, setPageNumber] = useState(1);
 
-  const { status, data, error, isFetching } = usePullRequests({
+  const { status, data, error, isFetching, hasMore } = usePullRequests({
     workspaceSlug,
     repositorySlug,
     state: [PullRequestState.OPEN, PullRequestState.MERGED],
     page: pageNumber,
   });
 
-  const { data: allPrData } = useAllPullRequests({
+  const { data: allPrData, isFetching: isChartFetching } = useAllPullRequests({
     workspaceSlug,
     repositorySlug,
     state: [PullRequestState.OPEN, PullRequestState.MERGED],
+    daysRange,
   });
 
   const pullRequests = useMemo<IPullRequestWithActivity[]>(
@@ -52,6 +53,11 @@ export default function PullRequestContainer({ workspaceSlug, repositorySlug, da
     [data]
   );
 
+  const initialDataRef = useRef<IPullRequestWithActivity[] | null>(null);
+  if (data && !initialDataRef.current) {
+    initialDataRef.current = data;
+  }
+
   const nextPageOnClickHandler = () => setPageNumber((p) => p + 1);
   const prevPageOnClickHandler = () => setPageNumber((p) => p - 1);
 
@@ -68,8 +74,9 @@ export default function PullRequestContainer({ workspaceSlug, repositorySlug, da
   );
 
   const chartPullRequests = useMemo(() => {
-    if (!allPrData) return filteredPullRequests;
-    const allPrs: IPullRequestWithActivity[] = allPrData.map((pr: any) => ({
+    const source = allPrData ?? initialDataRef.current;
+    if (!source) return [];
+    const prs: IPullRequestWithActivity[] = source.map((pr: any) => ({
       id: pr.id,
       title: pr.title,
       author: pr.author,
@@ -79,8 +86,8 @@ export default function PullRequestContainer({ workspaceSlug, repositorySlug, da
       approval: pr.approval,
       merged: pr.merged,
     }));
-    return allPrs.filter((pr) => pr.created && isAfter(new Date(pr.created), startDate));
-  }, [allPrData, filteredPullRequests, startDate]);
+    return prs.filter((pr) => pr.created && isAfter(new Date(pr.created), startDate));
+  }, [allPrData, startDate]);
 
   if (status === 'error') {
     return <ErrorToastr message={error instanceof Error ? error.message : ''} />;
@@ -92,14 +99,14 @@ export default function PullRequestContainer({ workspaceSlug, repositorySlug, da
     <>
       <PullRequestMetric workspaceSlug={workspaceSlug} repositorySlug={repositorySlug} />
       <div className='my-4'>
-        <PullRequestChart pullRequests={chartPullRequests} startDate={startDate} endDate={new Date()} />
+        <PullRequestChart pullRequests={chartPullRequests} startDate={startDate} endDate={new Date()} loading={isChartFetching} />
       </div>
       <PullRequestTable pullRequests={filteredPullRequests} loading={isFetching} />
       <PaginationButton
         onNext={nextPageOnClickHandler}
         onPrev={prevPageOnClickHandler}
         pageNum={pageNumber}
-        dataCount={pullRequests.length}
+        hasMore={hasMore}
       />
     </>
   );

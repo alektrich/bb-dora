@@ -16,7 +16,7 @@ interface IProps {
 }
 
 export default function TimeRangeDropdown({ selectedDays, onChange }: IProps) {
-  const selected = TIME_RANGES.find((r) => r.days === selectedDays) || TIME_RANGES[1];
+  const selected = TIME_RANGES.find((r) => r.days === selectedDays) || TIME_RANGES[0];
 
   return (
     <Listbox value={selected.days} onChange={onChange}>

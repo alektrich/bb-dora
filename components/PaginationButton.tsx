@@ -4,10 +4,10 @@ interface IProps {
   onNext: () => void;
   onPrev: () => void;
   pageNum: number;
-  dataCount: number;
+  hasMore: boolean;
 }
 
-export default function PaginationButton({ onNext, onPrev, pageNum, dataCount }: IProps) {
+export default function PaginationButton({ onNext, onPrev, pageNum, hasMore }: IProps) {
   return (
     <div className='flex flex-col items-center'>
       <div className='inline-flex mt-2 xs:mt-0'>
@@ -20,7 +20,7 @@ export default function PaginationButton({ onNext, onPrev, pageNum, dataCount }:
             Previous
           </button>
         )}
-        {pageNum >= 1 && dataCount === 10 && (
+        {hasMore && (
           <button
             onClick={onNext}
             className='inline-flex items-center py-2 px-4 text-sm font-medium text-gray-500 bg-white rounded-sm border border-gray-300 hover:bg-gray-100 hover:text-gray-700'

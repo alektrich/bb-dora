@@ -21,7 +21,7 @@ export default function DashboardPage() {
   const [userSelectedEnvironment, setUserSelectedEnvironment] = useState<
     { name: string; uuid: string } | undefined
   >(undefined);
-  const [daysRange, setDaysRange] = useState(14);
+  const [daysRange, setDaysRange] = useState(7);
 
   const { data } = useEnvironments({ workspaceSlug, repositorySlug });
 
