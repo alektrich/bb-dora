@@ -2,6 +2,11 @@
 
 DORA metrics dashboard for Bitbucket repositories. Built with Next.js 16, React 19, TypeScript, and Tailwind v4.
 
+Original repo: https://github.com/mbagsik00/bitbucket-dora-metrics
+- Updated to Next.js 16, React 19, TypeScript, and Tailwind v4.
+- Using API token for authentication env variables.
+- Added Docker support.
+
 ## Prerequisites
 
 - Node.js
