@@ -33,7 +33,11 @@ BB_API_TOKEN=your-api-token-value
 - `BB_EMAIL` — the email address associated with your Bitbucket account
 - `BB_API_TOKEN` — the API token you created in step 1
 
-### 3. Run the Project
+### 3. Configure team JSON
+
+Create `team-config.json` and add your workspace details.
+
+### 4. Run the Project
 
 ```bash
 npm i && npm run build && npm run start
