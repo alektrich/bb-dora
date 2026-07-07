@@ -33,6 +33,10 @@ yarn-error.log*
 # env files (can opt-in for committing if needed)
 .env.local
 
+# team metrics: real config (copy of team-config.example.json) + raw fetch cache
+/team-config.json
+/.cache/
+
 # vercel
 .vercel
 

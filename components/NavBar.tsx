@@ -17,9 +17,15 @@ export default function NavBar() {
                   <IoLogoBitbucket className='h-8 w-8 text-blue-500' />
                 </div>
 
-                <div className='ml-5 flex items-baseline space-x-4'>
+                <div className='ml-5 flex items-baseline space-x-6'>
                   <Link href='/' className='text-xl tracking-tight font-bold text-gray-900'>
                     Bitbucket DORA Metrics
+                  </Link>
+                  <Link
+                    href='/team-metrics'
+                    className='text-sm font-medium text-gray-600 hover:text-gray-900'
+                  >
+                    Team Metrics
                   </Link>
                 </div>
               </div>

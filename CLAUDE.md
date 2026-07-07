@@ -11,7 +11,11 @@ npm run lint       # ESLint
 npm run start      # production server on :6767
 ```
 
-No test framework configured yet.
+```bash
+npm test          # vitest — unit tests for the pure metrics engine (lib/metrics/)
+```
+
+Vitest is configured for the metrics engine only (`vitest.config.ts`, tests at `lib/**/*.test.ts`).
 
 ## Architecture
 
@@ -25,7 +29,16 @@ API routes act as a proxy to Bitbucket, handling auth server-side via `BB_EMAIL`
 - `/` — workspace list
 - `/[workspaceSlug]/repositories` — repository list
 - `/[workspaceSlug]/repositories/[repositorySlug]/dashboard` — main dashboard with deployment metrics, PR metrics, charts
+- `/team-metrics` — Engineering Effectiveness Scorecard export (multi-repo, date-ranged, copy-to-sheet)
 - `/coming-soon` — static placeholder page
+
+**Team Metrics feature** (`/team-metrics`): produces the scorecard's per-month + Team-Average rows.
+- API: `app/api/bitbucket/team-metrics/[workspaceSlug]/route.ts` — orchestrates fetch → normalize → compute.
+- Fetchers: `lib/api/bitbucketFetchers.ts` — CI pipelines, PR diffstat, activity (not fetched elsewhere), concurrency-pooled.
+- Engine: `lib/metrics/` — **pure, no Next/React/fs imports**, so it's unit-testable. `types.ts`, `columns.ts` (exact sheet column order + TSV/CSV serializers), `normalize.ts` (raw Bitbucket → normalized records), `computeTeamMetrics.ts` (month bucketing + all formulas + aggregate).
+- Config: `lib/config/teamConfig.ts` loads `team-config.json` (gitignored; falls back to `team-config.example.json`) via `fs`. Holds `team_size` + per-month overrides, thresholds, bots, `issue_key_regex`, `main_branches`.
+- Hook: `useTeamMetrics` (`enabled: false` + `refetch()` on the Generate button).
+- v1 computes the 13 Bitbucket columns; the 11 issue-tracker columns (ClickUp/Notion) are emitted blank.
 
 **Key directories:**
 - `lib/api/` — Bitbucket client (`bitbucket.ts`: `BASE_URL`, `getAuthHeader()`, axios) + `queryBuilder.ts` (pagelen/sort/query param builder)
